@@ -42,7 +42,6 @@ public class SirenActivationScript : MonoBehaviour
 
         _audioSource.volume = 0;
         _audioSource.Play();
-        Debug.Log(_audioSource.volume);
 
         _coroutine = StartCoroutine(ChangeVolume(_stepVolume, MaxVolume));
     }
