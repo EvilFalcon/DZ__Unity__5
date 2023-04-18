@@ -134,7 +134,6 @@ GameObject:
   - component: {fileID: 3738793}
   - component: {fileID: 3738795}
   - component: {fileID: 3738794}
-  - component: {fileID: 3738797}
   - component: {fileID: 3738796}
   m_Layer: 0
   m_Name: trigger
@@ -171,7 +170,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _stepVolume: 0.1
-  _volume: {fileID: 3738797}
+  _audioSource: {fileID: 3738796}
 --- !u!65 &3738795
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -281,19 +280,6 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!114 &3738797
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3738791}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: edf755121467426698ae943aa51070a4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _audioSource: {fileID: 3738796}
 --- !u!4 &47903517 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3893294197879345259, guid: 64dce48905ffd9b4293e595fa6941544, type: 3}
@@ -753,8 +739,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.6039543, y: 4.3437576, z: 1.669075}
-  m_Center: {x: 6.8458157, y: -1.6718793, z: -1.0326576}
+  m_Size: {x: 0.6039543, y: 4.3437576, z: 0.81127167}
+  m_Center: {x: 6.8458157, y: -1.6718793, z: -0.60375595}
 --- !u!1 &1586988025
 GameObject:
   m_ObjectHideFlags: 0
@@ -903,7 +889,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 400002, guid: 14f682f9e2d04af4396f95b882219950, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.21566176
+      value: 0.13
       objectReference: {fileID: 0}
     - target: {fileID: 400002, guid: 14f682f9e2d04af4396f95b882219950, type: 3}
       propertyPath: m_LocalPosition.z
