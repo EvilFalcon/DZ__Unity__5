@@ -32,13 +32,13 @@ public class SirenActivationScript : MonoBehaviour
         _trigger.Exitred -= DeActivate;
     }
 
-    public void Activate()
+    private void Activate()
     {
         StopCoroutine();
         _coroutine = StartCoroutine(ChangeVolume(_stepVolume, MaxVolume));
     }
 
-    public void DeActivate()
+    private void DeActivate()
     {
         StopCoroutine();
         _coroutine = StartCoroutine(ChangeVolume(_stepVolume, MinVolume));
