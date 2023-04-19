@@ -1,64 +1,59 @@
 using System;
 using System.Collections;
+using DefaultNamespace;
 using UnityEngine;
 
+[RequireComponent(typeof(AudioSource))]
 public class SirenActivationScript : MonoBehaviour
 {
-    [SerializeField] private float _stepVolume;
-    [SerializeField] private AudioSource _audioSource;
+    [SerializeField, Range(0f, 1f)] private float _stepVolume;
+    [SerializeField] private Trigger _trigger;
     private Coroutine _coroutine;
+    private AudioSource _audioSource;
+
     private const float MaxVolume = 1;
     private const float MinVolume = 0;
-    
-    private event Action OnPlay;
-    private event Action OfPlay;
-    
+
     private void Awake()
     {
-        OnPlay += Enable;
-        OfPlay += Disable;
-    }
-
-    private void OnTriggerEnter(Collider col)
-    {
-        if (col.TryGetComponent<Player>(out Player player))
-        {
-            OnPlay?.Invoke();
-        }
-    }
-
-    private void OnTriggerExit(Collider col)
-    {
-        if (col.TryGetComponent<Player>(out Player player))
-        {
-            OfPlay?.Invoke();
-        }
-    }
-    
-    private void Enable()
-    {
-        if (_coroutine != null)
-            StopCoroutine(_coroutine);
-
+        _audioSource = GetComponent<AudioSource>();
         _audioSource.volume = 0;
-        _audioSource.Play();
+    }
 
+    private void OnEnable()
+    {
+        _trigger.Entered += Activate;
+        _trigger.Exitred += DeActivate;
+    }
+
+    private void OnDisable()
+    {
+        _trigger.Entered -= Activate;
+        _trigger.Exitred -= DeActivate;
+    }
+
+    public void Activate()
+    {
+        StopCoroutine();
         _coroutine = StartCoroutine(ChangeVolume(_stepVolume, MaxVolume));
     }
 
-    private void Disable()
+    public void DeActivate()
+    {
+        StopCoroutine();
+        _coroutine = StartCoroutine(ChangeVolume(_stepVolume, MinVolume));
+    }
+
+    private void StopCoroutine()
     {
         if (_coroutine != null)
             StopCoroutine(_coroutine);
-
-        _coroutine = StartCoroutine(ChangeVolume(_stepVolume, MinVolume));
-
-        if (_audioSource.volume == 0)
-            _audioSource.Stop();
     }
 
     private IEnumerator ChangeVolume(float step, float targgetValue)
     {
+        _audioSource.Play();
+
         while (Math.Abs(_audioSource.volume - targgetValue) > Mathf.Epsilon)
         {
             _audioSource.volume = Mathf.MoveTowards(
@@ -69,5 +64,8 @@ public class SirenActivationScript : MonoBehaviour
 
             yield return null;
         }
+
+        if (_audioSource.volume == 0)
+            _audioSource.Stop();
     }
 }
