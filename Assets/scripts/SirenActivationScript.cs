@@ -17,7 +17,7 @@ public class SirenActivationScript : MonoBehaviour
     private void Awake()
     {
         _audioSource = GetComponent<AudioSource>();
-        _audioSource.volume = 0;
+        _audioSource.volume = MinVolume;
     }
 
     private void OnEnable()
